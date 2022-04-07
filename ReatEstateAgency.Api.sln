@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReatEstateAgency.Api", "ReatEstateAgency.Api\ReatEstateAgency.Api.csproj", "{18CBDFF2-C375-46D9-82F0-57B07CB513E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgency.Infrastructure", "RealEstateAgency.Infrastructure\RealEstateAgency.Infrastructure.csproj", "{585E801E-E854-4D60-957F-CE52F6D2F2FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgency.Services", "RealEstateAgency.Services\RealEstateAgency.Services.csproj", "{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18CBDFF2-C375-46D9-82F0-57B07CB513E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18CBDFF2-C375-46D9-82F0-57B07CB513E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18CBDFF2-C375-46D9-82F0-57B07CB513E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18CBDFF2-C375-46D9-82F0-57B07CB513E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{585E801E-E854-4D60-957F-CE52F6D2F2FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{585E801E-E854-4D60-957F-CE52F6D2F2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{585E801E-E854-4D60-957F-CE52F6D2F2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{585E801E-E854-4D60-957F-CE52F6D2F2FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
