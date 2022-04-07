@@ -30,9 +30,9 @@ namespace RealEstateAgency.Infrastructure.Implementations
             var url = "/?type=koop&zo=/amsterdam/tuin/&page=1&pagesize=25";
             var response = await GetResponseAsync<JsonResponse>(url, HttpMethod.Get);
             
-            return new GetRealEstatesResult()
+            return new GetRealEstatesResult
             {
-                RealEstateAdvts = response.Value.Objects.Select(o => new GetRealEstatesResult.RealEstateAdvt()
+                RealEstateAdvts = response.Value.Objects.Select(o => new GetRealEstatesResult.RealEstateAdvt
                 {
                     Makelaar = o.MakelaarNaam
                 }).ToArray()
