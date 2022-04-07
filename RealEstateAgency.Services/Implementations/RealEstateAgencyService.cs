@@ -13,20 +13,28 @@ namespace RealEstateAgency.Services.Implementations
         {
             _apiClient = apiClient;
         }
+
         public async Task<object> GetTopTenRealEstateAgencies()
         {
-            var result = await _apiClient.GetRealEstates();
+            var result = await _apiClient.GetRealEstates(pageSize: 500, withTuin: false);
             var orderedAgents = result.RealEstateAdvts.GroupBy(x => x.Makelaar).Select(group => new
             {
                 Makelaar = group.Key,
-                Count = group.Count()
-            }).OrderByDescending(x => x.Count).Take(10).ToArray();
+                NumberOfAdvts = group.Count()
+            }).OrderByDescending(x => x.NumberOfAdvts).Take(10).ToArray();
             return orderedAgents;
         }
 
-        public object GetTopTenRealEstateAgenciesWithGardens()
+        public async Task<object> GetTopTenRealEstateAgenciesWithGardens()
         {
-            throw new System.NotImplementedException();
+            var result = await _apiClient.GetRealEstates(pageSize: 500, withTuin: true);
+            var orderedAgents = result?.RealEstateAdvts.GroupBy(x => x.Makelaar).Select(group => new
+            {
+                Makelaar = group.Key,
+                NumberOfAdvts = group.Count()
+            }).OrderByDescending(x => x.NumberOfAdvts).Take(10).ToArray();
+
+            return orderedAgents;
         }
     }
 }

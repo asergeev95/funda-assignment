@@ -16,20 +16,20 @@ namespace RealEstateAgency.Api.Controllers
             _agencyService = agencyService;
         }
 
-        [HttpGet]
+        [HttpGet("top-ten-agents")]
         public async Task<object> GetTopTenRealEstateAgencies()
         {
 
             var result = await _agencyService.GetTopTenRealEstateAgencies();
             return result;
         }
-        //
-        // [HttpPost]
-        // public object GetTopTenRealEstateAgenciesWithGardens()
-        // {
-        //     var result = _agencyService.GetTopTenRealEstateAgenciesWithGardens();
-        //     return null;
-        // }
+        
+        [HttpGet("top-ten-agents-with-gardens")]
+        public async Task<object> GetTopTenRealEstateAgenciesWithGardens()
+        {
+            var result = await _agencyService.GetTopTenRealEstateAgenciesWithGardens();
+            return result;
+        }
         
     }
 }

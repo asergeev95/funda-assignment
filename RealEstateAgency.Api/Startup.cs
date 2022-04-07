@@ -25,8 +25,12 @@ namespace RealEstateAgency.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.AddSwaggerGen(opts => opts.SwaggerDoc("v1", new OpenApiInfo{ Title = "Real estate information", Version = "v1" }));
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            services.AddSwaggerGen(opts =>
+                opts.SwaggerDoc("v1", new OpenApiInfo {Title = "Real estate information", Version = "v1"}));
 
             services.AddScoped<IRealEstateAgencyService, RealEstateAgencyService>();
             services.AddHttpClient<IFundaPartnerApiClient, FundaPartnerApiClient>(c =>
@@ -44,15 +48,13 @@ namespace RealEstateAgency.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseSwagger();
-            app.UseSwaggerUI(opts => opts.SwaggerEndpoint("/swagger/v1/swagger.json", "Real estate information swagger"));
-            
+            app.UseSwaggerUI(
+                opts => opts.SwaggerEndpoint("/swagger/v1/swagger.json", "Real estate information swagger"));
+
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

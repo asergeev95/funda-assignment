@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -15,9 +16,11 @@ namespace RealEstateAgency.Infrastructure.Implementations
     public class FundaPartnerApiClient : IFundaPartnerApiClient
     {
         private readonly HttpClient _httpClient;
+
         private readonly JsonSerializerSettings _serializerSettings = new()
         {
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
+            ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
         };
 
         public FundaPartnerApiClient(HttpClient httpClient)
@@ -25,21 +28,39 @@ namespace RealEstateAgency.Infrastructure.Implementations
             _httpClient = httpClient;
         }
 
-        public async Task<GetRealEstatesResult> GetRealEstates()
+        public async Task<GetRealEstatesResult> GetRealEstates(int pageSize = 500, bool withTuin = false)
         {
-            var url = "/?type=koop&zo=/amsterdam/tuin/&page=1&pagesize=25";
+            string url;
+            var currentPage = 1;
+            url = withTuin ? $"/?type=koop&zo=/amsterdam/tuin/&page={currentPage}&pagesize={pageSize}" 
+                : $"/?type=koop&zo=/amsterdam/&page={currentPage}&pagesize={pageSize}";
+
+            var realEstatesObjects = new List<JsonResponse.ObjectResponse>();
             var response = await GetResponseAsync<JsonResponse>(url, HttpMethod.Get);
+            if (response.IsSuccess)
+            {
+                realEstatesObjects.AddRange(response.Value.Objects);
+                while (currentPage < response.Value.Paging.AantalPaginas)
+                {
+                    currentPage += 1;
+                    url = withTuin ? $"/?type=koop&zo=/amsterdam/tuin/&page={currentPage}&pagesize={pageSize}" 
+                        : $"/?type=koop&zo=/amsterdam/&page={currentPage}&pagesize={pageSize}";
+                    response = await GetResponseAsync<JsonResponse>(url, HttpMethod.Get);
+                    realEstatesObjects.AddRange(response.Value.Objects);
+                }
+            }
             
             return new GetRealEstatesResult
             {
-                RealEstateAdvts = response.Value.Objects.Select(o => new GetRealEstatesResult.RealEstateAdvt
+                RealEstateAdvts = realEstatesObjects.Select(o => new GetRealEstatesResult.RealEstateAdvt
                 {
                     Makelaar = o.MakelaarNaam
                 }).ToArray()
             };
         }
-        
-        private async Task<(bool IsSuccess, string FaultMessage, T Value)> GetResponseAsync<T>(string url, HttpMethod method, string content = null)
+
+        private async Task<(bool IsSuccess, string FaultMessage, T Value)> GetResponseAsync<T>(string url,
+            HttpMethod method, string content = null)
             where T : class
         {
             try

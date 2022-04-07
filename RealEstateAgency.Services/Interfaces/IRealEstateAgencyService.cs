@@ -5,6 +5,6 @@ namespace RealEstateAgency.Services.Interfaces
     public interface IRealEstateAgencyService
     {
         Task<object> GetTopTenRealEstateAgencies();
-        object GetTopTenRealEstateAgenciesWithGardens();
+        Task<object> GetTopTenRealEstateAgenciesWithGardens();
     }
 }
