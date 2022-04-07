@@ -1,4 +1,4 @@
-namespace RealEstateAgency.Infrastructure.Contracts
+namespace RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi.Contracts
 {
     public class GetRealEstatesResult
     {

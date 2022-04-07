@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using RealEstateAgency.Infrastructure.Interfaces;
+using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi;
 using RealEstateAgency.Services.Interfaces;
 
 namespace RealEstateAgency.Services.Implementations

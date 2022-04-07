@@ -5,8 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RealEstateAgency.Infrastructure.Implementations;
-using RealEstateAgency.Infrastructure.Interfaces;
+using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi;
 using RealEstateAgency.Services.Implementations;
 using RealEstateAgency.Services.Interfaces;
 

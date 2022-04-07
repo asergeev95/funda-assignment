@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using RealEstateAgency.Infrastructure.Contracts;
+using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi.Contracts;
 
-namespace RealEstateAgency.Infrastructure.Interfaces
+namespace RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi
 {
     public interface IFundaPartnerApiClient
     {

@@ -6,12 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using RealEstateAgency.Infrastructure.Contracts;
-using RealEstateAgency.Infrastructure.Interfaces;
-using RealEstateAgency.Infrastructure.Models;
+using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi.Contracts;
+using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi.Models;
 using Serilog;
 
-namespace RealEstateAgency.Infrastructure.Implementations
+namespace RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi
 {
     public class FundaPartnerApiClient : IFundaPartnerApiClient
     {
