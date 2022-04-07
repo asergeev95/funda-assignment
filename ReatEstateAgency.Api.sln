@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReatEstateAgency.Api", "ReatEstateAgency.Api\ReatEstateAgency.Api.csproj", "{18CBDFF2-C375-46D9-82F0-57B07CB513E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgency.Api", "RealEstateAgency.Api\RealEstateAgency.Api.csproj", "{18CBDFF2-C375-46D9-82F0-57B07CB513E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgency.Infrastructure", "RealEstateAgency.Infrastructure\RealEstateAgency.Infrastructure.csproj", "{585E801E-E854-4D60-957F-CE52F6D2F2FD}"
 EndProject

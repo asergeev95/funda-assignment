@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateAgency.Services.Interfaces;
 
-namespace ReatEstateAgency.Api.Controllers
+namespace RealEstateAgency.Api.Controllers
 {
     
     [ApiController]

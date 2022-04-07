@@ -10,7 +10,7 @@ using RealEstateAgency.Infrastructure.Interfaces;
 using RealEstateAgency.Services.Implementations;
 using RealEstateAgency.Services.Interfaces;
 
-namespace ReatEstateAgency.Api
+namespace RealEstateAgency.Api
 {
     public class Startup
     {
