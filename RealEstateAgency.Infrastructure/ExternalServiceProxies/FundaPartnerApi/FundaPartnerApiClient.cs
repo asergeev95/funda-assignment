@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using FluentResults;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi.Contracts;
@@ -27,35 +28,70 @@ namespace RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi
             _httpClient = httpClient;
         }
 
-        public async Task<GetRealEstatesResult> GetRealEstates(int pageSize = 500, bool withTuin = false)
+        public async Task<Result<GetRealEstatesResult>> GetRealEstates(GetRealEstatesDto dto)
         {
-            string url;
             var currentPage = 1;
-            url = withTuin ? $"/?type=koop&zo=/amsterdam/tuin/&page={currentPage}&pagesize={pageSize}" 
-                : $"/?type=koop&zo=/amsterdam/&page={currentPage}&pagesize={pageSize}";
+            BuildRequestUrls(dto, currentPage, out var selectedCity, out var selectedFeatures,  out var url);
 
             var realEstatesObjects = new List<JsonResponse.ObjectResponse>();
-            var response = await GetResponseAsync<JsonResponse>(url, HttpMethod.Get);
-            if (response.IsSuccess)
+            try
             {
-                realEstatesObjects.AddRange(response.Value.Objects);
-                while (currentPage < response.Value.Paging.AantalPaginas)
+                var response = await GetResponseAsync<JsonResponse>(url, HttpMethod.Get);
+                if (response.IsSuccess)
                 {
-                    currentPage += 1;
-                    url = withTuin ? $"/?type=koop&zo=/amsterdam/tuin/&page={currentPage}&pagesize={pageSize}" 
-                        : $"/?type=koop&zo=/amsterdam/&page={currentPage}&pagesize={pageSize}";
-                    response = await GetResponseAsync<JsonResponse>(url, HttpMethod.Get);
                     realEstatesObjects.AddRange(response.Value.Objects);
+                    while (currentPage < response.Value.Paging.AantalPaginas)
+                    {
+                        currentPage += 1;
+                        var paging = $"/&page={currentPage}&pagesize={dto.PageSize}";
+                        url = $"/?type=koop&zo={selectedCity}{selectedFeatures}{paging}";
+                        response = await GetResponseAsync<JsonResponse>(url, HttpMethod.Get);
+                        realEstatesObjects.AddRange(response.Value.Objects);
+                    }
                 }
-            }
-            
-            return new GetRealEstatesResult
-            {
-                RealEstateAdvts = realEstatesObjects.Select(o => new GetRealEstatesResult.RealEstateAdvt
+
+                return Result.Ok(new GetRealEstatesResult
                 {
-                    Makelaar = o.MakelaarNaam
-                }).ToArray()
-            };
+                    RealEstateAdvts = realEstatesObjects.Select(o => new GetRealEstatesResult.RealEstateAdvt
+                    {
+                        Makelaar = o.MakelaarNaam
+                    }).ToArray()
+                });
+            }
+            catch (Exception e)
+            {
+                return Result.Fail(e.Message);
+            }
+        }
+
+        private static void BuildRequestUrls(GetRealEstatesDto dto, int currentPage, out string selectedCity, out string searchFeature, out string url)
+        {
+            var paging = $"/&page={currentPage}&pagesize={dto.PageSize}";
+            var selectedFeatures = BuildSelectedFeatures(dto);
+            selectedCity = "/amsterdam";
+            url = $"/?type=koop&zo={selectedCity}{selectedFeatures}{paging}";
+            searchFeature = selectedFeatures;
+        }
+
+        private static string BuildSelectedFeatures(GetRealEstatesDto dto)
+        {
+            var selectedFeatures = string.Empty;
+            if (dto.WithBalcon)
+            {
+                selectedFeatures = $"/balcon";
+            }
+
+            if (dto.WithDakterras)
+            {
+                selectedFeatures = $"{selectedFeatures}/dakterras";
+            }
+
+            if (dto.WithTuin)
+            {
+                selectedFeatures = $"{selectedFeatures}/tuin";
+            }
+
+            return selectedFeatures;
         }
 
         private async Task<(bool IsSuccess, string FaultMessage, T Value)> GetResponseAsync<T>(string url,

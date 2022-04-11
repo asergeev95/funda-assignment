@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
+using FluentResults;
 using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi.Contracts;
 
 namespace RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi
 {
     public interface IFundaPartnerApiClient
     {
-        Task<GetRealEstatesResult> GetRealEstates(int pageSize = 500, bool withTuin = false);
+        Task<Result<GetRealEstatesResult>> GetRealEstates(GetRealEstatesDto dto);
     }
 }

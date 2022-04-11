@@ -8,8 +8,4 @@
       <ProjectReference Include="..\RealEstateAgency.Infrastructure\RealEstateAgency.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Models" />
-    </ItemGroup>
-
 </Project>

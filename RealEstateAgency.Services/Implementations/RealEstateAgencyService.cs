@@ -1,7 +1,10 @@
 using System.Linq;
 using System.Threading.Tasks;
+using FluentResults;
 using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi;
+using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi.Contracts;
 using RealEstateAgency.Services.Interfaces;
+using RealEstateAgency.Services.Models;
 
 namespace RealEstateAgency.Services.Implementations
 {
@@ -14,27 +17,43 @@ namespace RealEstateAgency.Services.Implementations
             _apiClient = apiClient;
         }
 
-        public async Task<object> GetTopTenRealEstateAgencies()
+        public async Task<Result<GetTopRealEstateAgenciesResult>> GetTopRealEstateAgencies(GetTopRealEstateAgenciesDto dto)
         {
-            var result = await _apiClient.GetRealEstates(pageSize: 500, withTuin: false);
-            var orderedAgents = result.RealEstateAdvts.GroupBy(x => x.Makelaar).Select(group => new
+            var getRealEstatesDto = BuildGetRealEstatesDto(dto);
+            var result = await _apiClient.GetRealEstates(getRealEstatesDto);
+            if (result.IsSuccess)
             {
-                Makelaar = group.Key,
-                NumberOfAdvts = group.Count()
-            }).OrderByDescending(x => x.NumberOfAdvts).Take(10).ToArray();
-            return orderedAgents;
+                var orderedAgents = result.Value.RealEstateAdvts.GroupBy(x => x.Makelaar).Select(group => new
+                {
+                    Makelaar = group.Key,
+                    NumberOfAdvts = group.Count()
+                }).OrderByDescending(x => x.NumberOfAdvts).Take(dto.Take).ToArray();
+                return Result.Ok(new GetTopRealEstateAgenciesResult
+                {
+                    RealEstateAgencyName = orderedAgents.Select(x => new GetTopRealEstateAgenciesResult.RealEstateInfo()
+                    {
+                        Name = x.Makelaar,
+                        AdvtsCount = x.NumberOfAdvts
+                    }).ToArray()
+                });    
+            }
+
+            return Result.Fail(result.Errors.First());
+
         }
 
-        public async Task<object> GetTopTenRealEstateAgenciesWithGardens()
+        private static GetRealEstatesDto BuildGetRealEstatesDto(GetTopRealEstateAgenciesDto dto)
         {
-            var result = await _apiClient.GetRealEstates(pageSize: 500, withTuin: true);
-            var orderedAgents = result?.RealEstateAdvts.GroupBy(x => x.Makelaar).Select(group => new
+            var apartmentFeatures = dto.ApartmentsFeature;
+            var featuresSelected = apartmentFeatures.HasValue;
+            var getRealEstatesDto = new GetRealEstatesDto
             {
-                Makelaar = group.Key,
-                NumberOfAdvts = group.Count()
-            }).OrderByDescending(x => x.NumberOfAdvts).Take(10).ToArray();
-
-            return orderedAgents;
+                PageSize = dto.PageSize,
+                WithBalcon = featuresSelected && apartmentFeatures.Value.HasFlag(ApartmentFeatures.Balcon),
+                WithDakterras = featuresSelected && apartmentFeatures.Value.HasFlag(ApartmentFeatures.Dakterras),
+                WithTuin = featuresSelected && apartmentFeatures.Value.HasFlag(ApartmentFeatures.Tuin)
+            };
+            return getRealEstatesDto;
         }
     }
 }

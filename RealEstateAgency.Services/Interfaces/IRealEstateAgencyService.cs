@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
+using FluentResults;
+using RealEstateAgency.Services.Models;
 
 namespace RealEstateAgency.Services.Interfaces
 {
     public interface IRealEstateAgencyService
     {
-        Task<object> GetTopTenRealEstateAgencies();
-        Task<object> GetTopTenRealEstateAgenciesWithGardens();
+        Task<Result<GetTopRealEstateAgenciesResult>> GetTopRealEstateAgencies(GetTopRealEstateAgenciesDto dto);
     }
 }
