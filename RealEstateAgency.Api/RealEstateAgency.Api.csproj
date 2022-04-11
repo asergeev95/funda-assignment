@@ -17,4 +17,8 @@
       <ProjectReference Include="..\RealEstateAgency.Services\RealEstateAgency.Services.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Dockerfile" />
+    </ItemGroup>
+
 </Project>

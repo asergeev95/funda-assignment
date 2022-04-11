@@ -6,6 +6,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgency.Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgency.Services", "RealEstateAgency.Services\RealEstateAgency.Services.csproj", "{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F36C7922-1037-47FB-B2CF-E166C11F52E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{7A3CC52D-A2AE-4DE7-9F98-DD594A76CA29}"
+ProjectSection(SolutionItems) = preProject
+	docker-compose.yml = docker-compose.yml
+	Dockerfile = Dockerfile
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +32,10 @@ Global
 		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{18CBDFF2-C375-46D9-82F0-57B07CB513E7} = {F36C7922-1037-47FB-B2CF-E166C11F52E8}
+		{585E801E-E854-4D60-957F-CE52F6D2F2FD} = {F36C7922-1037-47FB-B2CF-E166C11F52E8}
+		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC} = {F36C7922-1037-47FB-B2CF-E166C11F52E8}
 	EndGlobalSection
 EndGlobal
