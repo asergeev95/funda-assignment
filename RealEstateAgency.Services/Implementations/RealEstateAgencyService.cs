@@ -48,7 +48,7 @@ namespace RealEstateAgency.Services.Implementations
             var featuresSelected = apartmentFeatures.HasValue;
             var getRealEstatesDto = new GetRealEstatesDto
             {
-                PageSize = dto.PageSize,
+                PageSize = 200,
                 WithBalcon = featuresSelected && apartmentFeatures.Value.HasFlag(ApartmentFeatures.Balcon),
                 WithDakterras = featuresSelected && apartmentFeatures.Value.HasFlag(ApartmentFeatures.Dakterras),
                 WithTuin = featuresSelected && apartmentFeatures.Value.HasFlag(ApartmentFeatures.Tuin)

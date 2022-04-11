@@ -31,9 +31,7 @@ namespace RealEstateAgency.Api.Controllers
             var result = await _agencyService.GetTopRealEstateAgencies(
                 new GetTopRealEstateAgenciesDto
                 {
-                    Skip = request.Skip,
                     Take = request.Take,
-                    PageSize = request.PageSize,
                     ApartmentsFeature = string.IsNullOrEmpty(request.ApartmentFeatures) ? 
                         default(ApartmentFeatures?) : 
                         Enum.Parse<ApartmentFeatures>(request.ApartmentFeatures, true)
