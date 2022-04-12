@@ -35,7 +35,7 @@ curl -X 'POST' \
 -d '{
 "apartmentFeatures": "Tuin, Balcon, Dakterras",
 "take": 7
-}'
+}' | json_pp
 ```
 ```
 curl -X 'POST' \
@@ -45,7 +45,7 @@ curl -X 'POST' \
 -d '{
 "apartmentFeatures": "Tuin, Balcon",
 "take": 5
-}'
+}' | json_pp
 
 ```
 Also you can skip this property 
@@ -55,7 +55,7 @@ curl -X 'POST' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json-patch+json' \
   -d '{
-  "take": 5 }'
+  "take": 5 }' | json_pp
 ```
 
 Also you can skip `take` property. Default value `10` will be used. 
@@ -64,7 +64,7 @@ curl -X 'POST' \
   'http://localhost:8080/api/v1/real-estate/top-agents' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json-patch+json' \
-  -d '{}'
+  -d '{}' | json_pp
 ```
 
 
