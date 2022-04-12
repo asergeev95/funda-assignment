@@ -10,6 +10,6 @@ namespace RealEstateAgency.Api.Requests
         
         [CanBeNull]
         public string ApartmentFeatures { get; set; }
-        public int Take { get; set; }
+        public int? Take { get; set; }
     }
 }

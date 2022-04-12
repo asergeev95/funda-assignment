@@ -16,7 +16,7 @@ namespace RealEstateAgency.Api.Validators
                 .WithMessage($"ApartmentFeatures has invalid or empty value. Possible values are: {string.Join(",", Enum.GetValues<ApartmentFeatures>())}");
 
             RuleFor(x => x.Take)
-                .GreaterThan(0);
+                .Must(x => x.HasValue == false || x.Value > 0);
         }
     }
 }

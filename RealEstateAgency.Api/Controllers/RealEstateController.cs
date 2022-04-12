@@ -31,7 +31,7 @@ namespace RealEstateAgency.Api.Controllers
             var result = await _agencyService.GetTopRealEstateAgencies(
                 new GetTopRealEstateAgenciesDto
                 {
-                    Take = request.Take,
+                    Take = request.Take ?? 10,
                     ApartmentsFeature = string.IsNullOrEmpty(request.ApartmentFeatures) ? 
                         default(ApartmentFeatures?) : 
                         Enum.Parse<ApartmentFeatures>(request.ApartmentFeatures, true)
