@@ -2,7 +2,7 @@ version: '3.5'
 services:
   application:
     build: .
-    container_name: "REAService"
+    container_name: "real_estate_agency_service"
     ports:
       - "8080:8080"
     restart: always
