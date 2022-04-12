@@ -26,7 +26,7 @@ Based on previous step (How to run with Docker)
 
 `apartmentFeatures` stands for the features of apartments that you're looking for. This is Flags enum under the hood so you can specify several of then like this:
 
-```http request
+```
 curl -X 'POST' \
 'http://localhost:8080/api/v1/real-estate/top-agents' \
 -H 'accept: text/plain' \
