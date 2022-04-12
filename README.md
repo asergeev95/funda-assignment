@@ -1,5 +1,13 @@
 # funda-assignment
 
+## Solution structure
+* `docker` folder: `Dockerfile` and `docker-compose` for running application in docker container
+* `src` folder: api, infrastructure and business logic layers of the application
+* `tests` folder: all the kinds of tests
+
+<img width="338" alt="image" src="https://user-images.githubusercontent.com/26343229/163012725-9365d4f6-f7b3-47fa-aa62-fbd0aa532148.png">
+
+
 ## How to run with Docker
 1. Clone a project to your local directory: `git clone https://github.com/asergeev95/funda-assignment.git`
 2. Execute in command line: `cd funda-assignment`
