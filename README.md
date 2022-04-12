@@ -13,7 +13,7 @@ Based on previous step (How to run with Docker)
 2. Start any browser an go to `http://localhost:8080/swagger`
 3. You will see swagger page where you can test the application
 
-##Application requests
+## Application requests
 
 `POST ​/api​/v1​/real-estate​/top-agents` accept a request body 
 
