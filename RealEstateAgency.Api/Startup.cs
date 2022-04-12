@@ -1,16 +1,9 @@
-﻿using System;
-using System.Text.Json.Serialization;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using RealEstateAgency.Api.Validators;
-using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi;
-using RealEstateAgency.Services.Implementations;
-using RealEstateAgency.Services.Interfaces;
+using RealEstateAgency.Api.Extensions;
 
 namespace RealEstateAgency.Api
 {
@@ -26,32 +19,9 @@ namespace RealEstateAgency.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                );
-            services.AddSwaggerGen(opts =>
-                opts.SwaggerDoc("v1", new OpenApiInfo {Title = "Real estate information", Version = "v1"}));
-
-            services.AddScoped<IRealEstateAgencyService, RealEstateAgencyService>();
-            services.AddHttpClient<IFundaPartnerApiClient, FundaPartnerApiClient>(c =>
-            {
-                var url = Configuration.GetValue<string>("ExternalServices:FundaPartnerApi:Url");
-                var key = Configuration.GetValue<string>("ExternalServices:FundaPartnerApi:Key");
-                c.BaseAddress = new Uri($"{url}/{key}");
-            });
-            services.AddControllers()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                })
-                .AddFluentValidation(
-                    config =>
-                    {
-                        config.RegisterValidatorsFromAssemblyContaining<V1GetTopRentalAgenciesRequestValidator>();
-                    });
-
+            services
+                .RegisterCommon()
+                .RegisterServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
