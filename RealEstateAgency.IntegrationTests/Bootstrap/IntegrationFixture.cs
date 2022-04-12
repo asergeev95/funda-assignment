@@ -54,7 +54,7 @@ namespace RealEstateAgency.IntegrationTests.Bootstrap
             var projectName = startupAssembly.GetName().Name;
 
             // Get currently executing test project path
-            var applicationBasePath = System.AppContext.BaseDirectory;
+            var applicationBasePath = AppContext.BaseDirectory;
 
             // Find the path to the target project
             var directoryInfo = new DirectoryInfo(applicationBasePath);
@@ -62,14 +62,12 @@ namespace RealEstateAgency.IntegrationTests.Bootstrap
             {
                 directoryInfo = directoryInfo.Parent;
 
-                var projectDirectoryInfo = new DirectoryInfo(Path.Combine(directoryInfo.FullName, projectRelativePath));
-                if (projectDirectoryInfo.Exists)
+                var projectDirectoryInfo = new DirectoryInfo(Path.Combine(directoryInfo!.FullName, projectRelativePath));
+                if (!projectDirectoryInfo.Exists) continue;
+                var projectFileInfo = new FileInfo(Path.Combine(projectDirectoryInfo.FullName, projectName!, $"{projectName}.csproj"));
+                if (projectFileInfo.Exists)
                 {
-                    var projectFileInfo = new FileInfo(Path.Combine(projectDirectoryInfo.FullName, projectName, $"{projectName}.csproj"));
-                    if (projectFileInfo.Exists)
-                    {
-                        return Path.Combine(projectDirectoryInfo.FullName, projectName);
-                    }
+                    return Path.Combine(projectDirectoryInfo.FullName, projectName);
                 }
             }
             while (directoryInfo.Parent != null);
