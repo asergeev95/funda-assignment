@@ -30,7 +30,7 @@ namespace RealEstateAgency.Services.Implementations
                 }).OrderByDescending(x => x.NumberOfAdvts).Take(dto.Take).ToArray();
                 return Result.Ok(new GetTopRealEstateAgenciesResult
                 {
-                    RealEstateAgencyName = orderedAgents.Select(x => new GetTopRealEstateAgenciesResult.RealEstateInfo()
+                    RealEstatesInfo = orderedAgents.Select(x => new GetTopRealEstateAgenciesResult.RealEstateInfo
                     {
                         Name = x.Makelaar,
                         AdvtsCount = x.NumberOfAdvts
@@ -42,7 +42,7 @@ namespace RealEstateAgency.Services.Implementations
 
         }
 
-        private static GetRealEstatesDto BuildGetRealEstatesDto(GetTopRealEstateAgenciesDto dto)
+        internal static GetRealEstatesDto BuildGetRealEstatesDto(GetTopRealEstateAgenciesDto dto)
         {
             var apartmentFeatures = dto.ApartmentsFeature;
             var featuresSelected = apartmentFeatures.HasValue;

@@ -2,7 +2,7 @@ namespace RealEstateAgency.Services.Models
 {
     public class GetTopRealEstateAgenciesResult
     {
-        public RealEstateInfo[] RealEstateAgencyName { get; set; }
+        public RealEstateInfo[] RealEstatesInfo { get; set; }
 
         public class RealEstateInfo
         {

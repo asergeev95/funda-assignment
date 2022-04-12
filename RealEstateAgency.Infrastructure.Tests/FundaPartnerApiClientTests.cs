@@ -18,7 +18,7 @@ namespace RealEstateAgency.Infrastructure.Tests
         public async Task ShouldCorrectlySendRequest(bool withBalcon, bool withDakterras, bool withTuin)
         {
             var service = GetService();
-            var dto = new GetRealEstatesDto()
+            var dto = new GetRealEstatesDto
             {
                 PageSize = 100,
                 WithBalcon = withBalcon,

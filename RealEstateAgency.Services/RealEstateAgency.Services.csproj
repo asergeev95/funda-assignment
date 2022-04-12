@@ -5,6 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <InternalsVisibleTo Include="RealEstateAgency.Services.Tests" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\RealEstateAgency.Infrastructure\RealEstateAgency.Infrastructure.csproj" />
     </ItemGroup>
 

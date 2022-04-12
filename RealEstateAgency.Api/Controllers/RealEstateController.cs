@@ -42,7 +42,7 @@ namespace RealEstateAgency.Api.Controllers
             }
             return Ok(new V1GetTopRentalAgenciesResponse
             {
-                RealEstateAgencyInfo = result.Value.RealEstateAgencyName.Select(x => new V1GetTopRentalAgenciesResponse.RealEstateInfo
+                RealEstateAgencyInfo = result.Value.RealEstatesInfo.Select(x => new V1GetTopRentalAgenciesResponse.RealEstateInfo
                 {
                     Name = x.Name,
                     AdvtsCount = x.AdvtsCount
