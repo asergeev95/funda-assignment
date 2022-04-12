@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RealEstateAgency.Api.Validators;
 using RealEstateAgency.Infrastructure.ExternalServiceProxies.FundaPartnerApi;
 using RealEstateAgency.Services.Implementations;
 using RealEstateAgency.Services.Interfaces;
@@ -38,6 +41,17 @@ namespace RealEstateAgency.Api
                 var key = Configuration.GetValue<string>("ExternalServices:FundaPartnerApi:Key");
                 c.BaseAddress = new Uri($"{url}/{key}");
             });
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                })
+                .AddFluentValidation(
+                    config =>
+                    {
+                        config.RegisterValidatorsFromAssemblyContaining<V1GetTopRentalAgenciesRequestValidator>();
+                    });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

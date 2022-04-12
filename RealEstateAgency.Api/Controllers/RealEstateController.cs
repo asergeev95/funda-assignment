@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateAgency.Api.Requests;
 using RealEstateAgency.Api.Responses;
@@ -21,9 +22,8 @@ namespace RealEstateAgency.Api.Controllers
             _agencyService = agencyService;
         }
 
-        //balkon - balcony
-        //dakterras - roof terrace
-        //tuin - garden
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("top-agents")]
         public async Task<ActionResult<V1GetTopRentalAgenciesResponse>> GetTopTenRealEstateAgencies(V1GetTopRentalAgenciesRequest request)
         {

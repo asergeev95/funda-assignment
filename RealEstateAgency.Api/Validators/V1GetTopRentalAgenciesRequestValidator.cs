@@ -13,7 +13,10 @@ namespace RealEstateAgency.Api.Validators
         {
             RuleFor(x => x.ApartmentFeatures)
                 .Must(x => string.IsNullOrEmpty(x) || Enum.TryParse(x, true, out ApartmentFeatures _))
-                .WithMessage("ApartmentFeatures has invalid or empty value");
+                .WithMessage($"ApartmentFeatures has invalid or empty value. Possible values are: {string.Join(",", Enum.GetValues<ApartmentFeatures>())}");
+
+            RuleFor(x => x.Take)
+                .GreaterThan(0);
         }
     }
 }
