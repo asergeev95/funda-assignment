@@ -14,6 +14,7 @@ Based on previous step (How to run with Docker)
 3. You will see swagger page where you can test the application
 
 ##Application requests
+
 `POST ​/api​/v1​/real-estate​/top-agents` accept a request body 
 
 ```json
