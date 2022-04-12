@@ -36,7 +36,7 @@ curl -X 'POST' \
 "take": 7
 }'
 ```
-```http request
+```
 curl -X 'POST' \
 'http://localhost:8080/api/v1/real-estate/top-agents' \
 -H 'accept: text/plain' \
@@ -48,7 +48,7 @@ curl -X 'POST' \
 
 ```
 Also you can skip this property 
-```http request
+```
 curl -X 'POST' \
   'http://localhost:8080/api/v1/real-estate/top-agents' \
   -H 'accept: text/plain' \
@@ -58,7 +58,7 @@ curl -X 'POST' \
 ```
 
 Also you can skip `take` property. Default value `10` will be used. 
-```http request
+```
 curl -X 'POST' \
   'http://localhost:8080/api/v1/real-estate/top-agents' \
   -H 'accept: text/plain' \
