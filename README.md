@@ -15,7 +15,6 @@
 
 
 ## How to test
-Based on previous step (How to run with Docker) 
 
 1. Run the application. If you can't use Docker launch it via Rider or VisualStudio.
 2. Start any browser an go to `http://localhost:8080/swagger`
