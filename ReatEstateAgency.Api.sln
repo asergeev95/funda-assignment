@@ -25,6 +25,8 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateAgency.IntegrationTests", "RealEstateAgency.IntegrationTests\RealEstateAgency.IntegrationTests.csproj", "{B8643BE1-4CDA-47F3-8420-A4FCA1DE068E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5A8F1457-7098-43A4-9D79-98D292BB4536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A8F1457-7098-43A4-9D79-98D292BB4536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A8F1457-7098-43A4-9D79-98D292BB4536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8643BE1-4CDA-47F3-8420-A4FCA1DE068E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8643BE1-4CDA-47F3-8420-A4FCA1DE068E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8643BE1-4CDA-47F3-8420-A4FCA1DE068E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8643BE1-4CDA-47F3-8420-A4FCA1DE068E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{18CBDFF2-C375-46D9-82F0-57B07CB513E7} = {F36C7922-1037-47FB-B2CF-E166C11F52E8}
@@ -58,5 +64,6 @@ Global
 		{596E474D-9604-40FA-BAEC-4DFCD98ECBEC} = {F36C7922-1037-47FB-B2CF-E166C11F52E8}
 		{8B35F95D-496C-4D51-AD7B-D0357CD03978} = {28748AE6-E48A-4DE9-B4D7-63B422FA3829}
 		{5A8F1457-7098-43A4-9D79-98D292BB4536} = {28748AE6-E48A-4DE9-B4D7-63B422FA3829}
+		{B8643BE1-4CDA-47F3-8420-A4FCA1DE068E} = {28748AE6-E48A-4DE9-B4D7-63B422FA3829}
 	EndGlobalSection
 EndGlobal
